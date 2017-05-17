@@ -3,9 +3,12 @@ package ai152.pasibayeva.com.Controllers;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+
+
 
 
 /**
@@ -20,10 +23,24 @@ public class Controller {
     BorderPane pane;
 
     @FXML
+    Button brushButton;
+
+    @FXML
+    Button eraserButton;
+
+    @FXML
+    Button thicknessButton;
+
+    @FXML
     public void initialize(){
 
-        canvas.widthProperty().bind(pane.widthProperty());
-        canvas.heightProperty().bind(pane.heightProperty());
+//        canvas.widthProperty().bind(pane.widthProperty());
+//        canvas.heightProperty().bind(pane.heightProperty());
+
+//        Image imageDecline = new Image(getClass().getResourceAsStream("/ai152/pasibayeva/res/imgs/image.png"));
+//        brushButton = new Button();
+
+//        brushButton.setGraphic(new ImageView(imageDecline));
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         initDraw(gc);

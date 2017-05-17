@@ -21,9 +21,11 @@ public class Main extends Application{
 //        Image image = new Image(file.toURI().toString());
 //        ImageView iv = new ImageView(image);
 
-        primaryStage.setScene(new Scene(root, 900, 600));
+        Scene scene = new Scene(root, 600, 400);
+
+        scene.getStylesheets().addAll(this.getClass().getResource("../res/css/style.css").toExternalForm());
         primaryStage.setTitle("MyPaintStudio");
-//        scene.getStylesheets().add("button.css");
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 }

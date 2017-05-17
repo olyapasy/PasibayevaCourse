@@ -1,0 +1,6 @@
+#brushButton{
+    -fx-background-image: url("../imgs/image.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 70 50;
+    -fx-background-position: center center;
+}
