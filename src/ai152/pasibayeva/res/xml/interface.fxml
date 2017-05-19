@@ -56,9 +56,9 @@
     <left>
         <Pane prefHeight="375.0" prefWidth="103.0" BorderPane.alignment="CENTER">
             <children>
-                <Button id="brushButton" fx:id="brushButton" layoutX="24.0" layoutY="72.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="56.0" />
-                <Button fx:id="eraserButton" layoutX="23.0" layoutY="138.0" mnemonicParsing="false" text="Eraser" />
-                <Button fx:id="thicknessButton" layoutX="8.0" layoutY="204.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="87.0" text="Thickness" />
+                <Button id="brushButton"     fx:id="brushButton" layoutX="24.0" layoutY="72.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="56.0" />
+                <Button id="eraserButton"    fx:id="eraserButton" layoutX="23.0" layoutY="138.0" mnemonicParsing="false" text="Eraser" />
+                <Button id="thicknessButton"    fx:id="thicknessButton" layoutX="8.0" layoutY="204.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="87.0" text="Thickness" />
             </children></Pane>
     </left>
    <center>
