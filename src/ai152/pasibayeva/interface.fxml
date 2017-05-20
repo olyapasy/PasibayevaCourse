@@ -53,7 +53,7 @@
    <left>
       <Pane prefHeight="375.0" prefWidth="103.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="26.0" layoutY="62.0" mnemonicParsing="false" text="Brush" />
+            <Button id="BrushButton" layoutX="26.0" layoutY="62.0" mnemonicParsing="false" text="Brush" />
             <Button layoutX="26.0" layoutY="141.0" mnemonicParsing="false" text="Eraser" />
             <Button layoutX="18.0" layoutY="223.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Thikness" />
          </children></Pane>

@@ -9,10 +9,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.File;
 
 public class Main extends Application{
-    BrushButton brushButton = new BrushButton();
 
     public static void main(String[] args) {
         launch(args);
@@ -24,6 +24,8 @@ public class Main extends Application{
         File file = new File("C:\\Users\\Ольга\\Desktop\\logo2.png");
         Image image = new Image(file.toURI().toString());
         ImageView iv = new ImageView(image);
+
+
 
         Scene scene = new Scene(root, 900, 600);
 
