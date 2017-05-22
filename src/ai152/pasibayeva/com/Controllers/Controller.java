@@ -1,13 +1,21 @@
 package ai152.pasibayeva.com.Controllers;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 
 /**
@@ -31,6 +39,9 @@ public class Controller {
     Slider sliderB;
 
     @FXML
+    Slider sliderOpacity;
+
+    @FXML
     Button brushButton;
 
     @FXML
@@ -39,11 +50,27 @@ public class Controller {
     @FXML
     Button thicknessButton;
 
+    @FXML
+    Label colorLabel;
+
+    @FXML
+    MenuItem saveCase;
+
+    @FXML
+    MenuItem loadCase;
+
    private int red = 0;
    private int green = 0;
    private int blue = 0;
+   private double opacity = 1.0;
 
    private int i = 1;
+
+
+    Image bgImage;
+    double bgX, bgY, bgW = 100.0, bgH = 100.0;
+
+
 
 
 
@@ -62,6 +89,7 @@ public class Controller {
         addSliderListeners(gc);
         addCanvasListeners(gc);
         addButtonsListeners(gc);
+        addMenuBarListeners(gc);
 
     }
 
@@ -82,8 +110,6 @@ public class Controller {
                 canvasWidth,    //width of the rectangle
                 canvasHeight);  //height of the rectangle
 
-        
-
 
     }
 
@@ -92,19 +118,28 @@ public class Controller {
           sliderR.valueProperty().addListener((observable, oldValue, newValue) ->
     {
         red = newValue.intValue();
-        gc.setStroke(Color.rgb(red, green, blue));
+        gc.setStroke(Color.rgb(red,green,blue,opacity));
+        colorLabel.setBackground(new Background(new BackgroundFill(Color.rgb(red,green,blue), CornerRadii.EMPTY, Insets.EMPTY)));
     });
 
     sliderG.valueProperty().addListener((observable, oldValue, newValue) ->
     {
         green = newValue.intValue();
-        gc.setStroke(Color.rgb(red, green, blue));
+        gc.setStroke(Color.rgb(red,green,blue,opacity));
+        colorLabel.setBackground(new Background(new BackgroundFill(Color.rgb(red,green,blue), CornerRadii.EMPTY, Insets.EMPTY)));
     });
 
     sliderB.valueProperty().addListener((observable, oldValue, newValue) ->
     {
         blue = newValue.intValue();
-        gc.setStroke(Color.rgb(red, green, blue));
+        gc.setStroke(Color.rgb(red,green,blue,opacity));
+        colorLabel.setBackground(new Background(new BackgroundFill(Color.rgb(red,green,blue), CornerRadii.EMPTY, Insets.EMPTY)));
+    });
+
+    sliderOpacity.valueProperty().addListener((observable, oldValue, newValue) ->
+    {
+        opacity = newValue.doubleValue();
+        gc.setStroke(Color.rgb(red,green,blue,opacity));
     });
 
     }
@@ -135,20 +170,23 @@ public class Controller {
         sliderR.setMin(0);
         sliderR.setMax(255);
         sliderR.setValue(red);
-        sliderR.setShowTickLabels(true);
-        sliderR.setShowTickMarks(true);
+
 
         sliderG.setMin(0);
         sliderG.setMax(255);
         sliderG.setValue(green);
-        sliderG.setShowTickLabels(true);
-        sliderG.setShowTickMarks(true);
+
 
         sliderB.setMin(0);
         sliderB.setMax(255);
         sliderB.setValue(blue);
-        sliderB.setShowTickLabels(true);
-        sliderB.setShowTickMarks(true);
+
+        sliderOpacity.setMin(0.0);
+        sliderOpacity.setMax(1.0);
+        sliderOpacity.setValue(opacity);
+
+        colorLabel.setBackground(new Background(new BackgroundFill(Color.rgb(red,green,blue), CornerRadii.EMPTY, Insets.EMPTY)));
+
     }
 
     private void addButtonsListeners(GraphicsContext gc){
@@ -167,6 +205,7 @@ public class Controller {
             sliderR.setDisable(false);
             sliderG.setDisable(false);
             sliderB.setDisable(false);
+            sliderOpacity.setDisable(false);
 
             gc.setStroke(Color.rgb(red, green, blue));
         });
@@ -185,6 +224,26 @@ public class Controller {
         });
 
 
+    }
+
+    private void addMenuBarListeners(GraphicsContext gc){
+
+        saveCase.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
+        });
+
+        loadCase.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+            Image bgImage;
+            double bgX, bgY, bgW = 100.0, bgH = 100.0;
+
+            bgImage = new Image(getClass().getResourceAsStream("/ai152/pasibayeva/res/imgs/BLUE.png"));
+            bgX = gc.getCanvas().getWidth()/2 - bgW/2;
+            bgY = gc.getCanvas().getHeight()/2 - bgH/2;
+            gc.drawImage(bgImage, bgX, bgY, bgW, bgH);
+
+            gc.fill();
+
+        });
     }
 }
 
