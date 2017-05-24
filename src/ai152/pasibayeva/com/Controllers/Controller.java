@@ -1,5 +1,6 @@
 package ai152.pasibayeva.com.Controllers;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
@@ -9,19 +10,22 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
+
+import javax.imageio.ImageIO;
+import java.io.File;
 
 
 /**
  * Created by Ольга on 07.04.2017.
  */
-public class Controller {
+public class Controller  {
 
     @FXML
     Canvas canvas;
@@ -59,6 +63,9 @@ public class Controller {
     @FXML
     MenuItem loadCase;
 
+    @FXML
+    MenuItem clearCase;
+
    private int red = 0;
    private int green = 0;
    private int blue = 0;
@@ -67,8 +74,6 @@ public class Controller {
    private int i = 1;
 
 
-    Image bgImage;
-    double bgX, bgY, bgW = 100.0, bgH = 100.0;
 
 
 
@@ -77,13 +82,12 @@ public class Controller {
     @FXML
     public void initialize(){
 
+
 //        canvas.widthProperty().bind(pane.widthProperty());
 //        canvas.heightProperty().bind(pane.heightProperty());
-
-
+        
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        initDraw(gc);
         initSlider(red, green, blue);
 
         addSliderListeners(gc);
@@ -95,22 +99,45 @@ public class Controller {
 
 
 
-
-    private void initDraw(GraphicsContext gc){
+    private void initDrawImage(GraphicsContext gc){
         double canvasWidth = gc.getCanvas().getWidth();
         double canvasHeight = gc.getCanvas().getHeight();
 
-        gc.setFill(Color.WHITE);
 
-        gc.fill();
 
-        gc.strokeRect(
-                0,              //x of the upper left corner
+        Image bgImage;
+        double bgX, bgY, bgW = 100.0, bgH = 100.0;
+
+        bgImage = new Image(getClass().getResourceAsStream("/ai152/pasibayeva/res/imgs/BLUE.png"));
+        bgX = canvasWidth/2 - bgW/2;
+        bgY = canvasHeight/2 - bgH/2;
+
+
+        gc.drawImage(bgImage, bgX, bgY, bgW, bgH);
+
+
+
+    }
+
+    private void clearCanvas(GraphicsContext gc){
+
+        gc.clearRect(0,              //x of the upper left corner
                 0,              //y of the upper left corner
-                canvasWidth,    //width of the rectangle
-                canvasHeight);  //height of the rectangle
+                canvas.getWidth(),    //width of the rectangle
+                canvas.getHeight());
+    }
+
+    private void saveImg() {
+        WritableImage wim = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
+        canvas.snapshot(null, wim);
+
+        File file = new File("CanvasImage.png");
 
 
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(wim, null), "png", file);
+        } catch (Exception s) {
+        }
     }
 
     private void addSliderListeners(GraphicsContext gc){
@@ -195,8 +222,9 @@ public class Controller {
             sliderR.setDisable(true);
             sliderG.setDisable(true);
             sliderB.setDisable(true);
+            sliderOpacity.setDisable(true);
 
-            gc.setStroke(Color.rgb(244, 244, 244));
+            gc.setStroke(Color.rgb(255, 244, 244));
         });
 
 
@@ -224,26 +252,34 @@ public class Controller {
         });
 
 
+
     }
 
     private void addMenuBarListeners(GraphicsContext gc){
 
-        saveCase.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+        loadCase.setOnAction(event -> {
+
+            initDrawImage(gc);
 
         });
 
-        loadCase.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
-            Image bgImage;
-            double bgX, bgY, bgW = 100.0, bgH = 100.0;
+        saveCase.setOnAction(event -> {
 
-            bgImage = new Image(getClass().getResourceAsStream("/ai152/pasibayeva/res/imgs/BLUE.png"));
-            bgX = gc.getCanvas().getWidth()/2 - bgW/2;
-            bgY = gc.getCanvas().getHeight()/2 - bgH/2;
-            gc.drawImage(bgImage, bgX, bgY, bgW, bgH);
-
-            gc.fill();
+            saveImg();
 
         });
+
+        clearCase.setOnAction(e->{
+
+            clearCanvas(gc);
+
+        });
+
+
+
     }
+
+
+
 }
 
