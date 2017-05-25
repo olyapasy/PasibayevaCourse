@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ai152.pasibayeva.com.Controllers.Controller">
+<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ai152.pasibayeva.com.controllers.Controller">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
@@ -78,6 +78,10 @@
             </children></Pane>
     </left>
    <center>
-      <Canvas fx:id="canvas" height="372.0" width="383.0" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="canvasAnchorPane" BorderPane.alignment="CENTER">
+         <children>
+            <Canvas fx:id="canvas" height="372.0" width="391.0" />
+         </children>
+      </AnchorPane>
    </center>
 </BorderPane>
