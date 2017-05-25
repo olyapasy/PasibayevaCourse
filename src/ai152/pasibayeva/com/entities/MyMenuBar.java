@@ -43,11 +43,11 @@ public class MyMenuBar {
 
         Image img =  initFileChooser();
 
-        if (img.equals(null)){
-            Alert dialog = new Alert(Alert.AlertType.INFORMATION);
-            dialog.setHeaderText("Error");
-            dialog.setContentText("Cannot resolve the file");
-            dialog.showAndWait();
+        if (img != null){
+
+            gc.drawImage(img, 0, 0, canvasWidth, canvasHeight);
+
+
         } else {
 
 //            Alert dialog = new Alert(Alert.AlertType.INFORMATION);
@@ -55,11 +55,14 @@ public class MyMenuBar {
 //            dialog.setContentText(path);
 //            dialog.showAndWait();
 //
+            Alert dialog = new Alert(Alert.AlertType.INFORMATION);
+            dialog.setHeaderText("Error");
+            dialog.setContentText("Cannot resolve the file");
+            dialog.showAndWait();
 
 
 
 
-            gc.drawImage(img, 0, 0, canvasWidth, canvasHeight);
         }
     }
 

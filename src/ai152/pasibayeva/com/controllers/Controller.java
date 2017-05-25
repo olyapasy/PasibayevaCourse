@@ -71,9 +71,6 @@ public class Controller  {
         Buttons btns = new Buttons(brushButton, eraserButton, thicknessButton,gc );
         MyMenuBar menuBar = new MyMenuBar(clearCase,loadCase,saveCase,myCanvas.getCanvas());
 
-
-
-
         myCanvas.addCanvasListeners();
         sliders.addSliderListeners(gc);
         btns.addButtonsListeners(gc,sliders.getrSlider(), sliders.getgSlider(),sliders.getbSlider(),sliders.getOpacitySlider(),sliders.getRed(), sliders.getGreen(), sliders.getBlue());
